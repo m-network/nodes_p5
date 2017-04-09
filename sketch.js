@@ -3,6 +3,7 @@ var limit = 200;
 var offset = 100;
 var speed = 0.5;
 var img;
+var bg_img;
 var cam;
 var sizeX, sizeY;
 var window_x, window_y;
@@ -11,17 +12,20 @@ var counter=0;
 function setup() {
     createCanvas(windowWidth, windowHeight);
     smooth();
-    sizeX = windowWidth*4;
-    sizeY = windowHeight*4;
+    sizeX = windowWidth;
+    sizeY = windowHeight;
     window_x = width; 
     window_y = height;
     cam = new Camera();
-    cam.reset(1.0, width, height);
+    cam.reset(1.0, sizeX, sizeY);
+    cam.translate(-windowWidth/2,-windowHeight/2);
+    getFromDatabase();
+    bg_img = loadImage("../assets/mycelial/startBG3.png");
 }
 
 function draw() {
-  background(0);
-  drawFabric();
+  background(bg_img);
+  //drawFabric();
   strokeWeight(5);
   fill(0, 40);
   rect(0,0,sizeX,sizeY);
@@ -37,7 +41,7 @@ function draw() {
 
 /**** Events ****/
 function windowResized() {
-  cam.reset(1.0, width, height);
+  cam.reset(1.0, sizeX, sizeX);
   resizeCanvas(windowWidth, windowHeight);
 }
 
@@ -123,10 +127,12 @@ function connectNodes(){
         if(nodes.length > 1){
             var posX = (nodes[i].x + nodes[minIdx].x) / 2;
             var posY = (nodes[i].y + nodes[minIdx].y) / 2;
+    stroke(200);
             fill(255);
             textAlign(CENTER);
             textSize(15);
             text(distance + " km", posX, posY);
+    stroke(0);
             line(nodes[i].x, nodes[i].y, nodes[minIdx].x, nodes[minIdx].y);
         }
     }

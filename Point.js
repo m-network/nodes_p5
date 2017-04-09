@@ -21,6 +21,10 @@ class Point {
         fill(color(100,90));
         stroke(this.color);
         ellipse(this.x, this.y, this.outer_sz, this.outer_sz);
+            fill(255);
+            textAlign(CENTER);
+            textSize(15);
+            text(this.name+", "+this.place, this.x, this.y);
     }
 
     distance(point){
