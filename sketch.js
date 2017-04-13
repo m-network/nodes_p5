@@ -20,7 +20,7 @@ function setup() {
     cam.reset(1.0, sizeX, sizeY);
     cam.translate(-windowWidth/2,-windowHeight/2);
     getFromDatabase();
-    bg_img = loadImage("../assets/mycelial/startBG3.png");
+    bg_img = loadImage("assets/startBG3.png");
 }
 
 function draw() {
@@ -168,10 +168,12 @@ setInterval(function(){
 }, 10*1000);
 
 function getFromDatabase(){
-    var thisBaseURL = "http://10.0.1.42/getGPSLocationNodes.php";
+    var thisBaseURL = "http://198.58.116.131/nodes_p5/getGPSLocationNodes.php";
     var ids = [];
     for(i in nodes)
+    {
         ids.push(nodes[i].id);
+    }
 
 	$.post(thisBaseURL, 
 			{ 
